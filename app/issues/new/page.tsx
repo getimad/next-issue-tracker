@@ -7,6 +7,7 @@ import { useState } from "react";
 import { createIssueSchema } from "@/app/schemas/IssueSchema";
 import { z } from "zod";
 import axios from "axios";
+import Spinner from "@components/Spinner";
 
 // Get the type of the createIssueSchema
 type IssueForm = z.infer<typeof createIssueSchema>;
@@ -21,12 +22,15 @@ export default function NewIssuePage() {
   });
   const router = useRouter();
   const [serverError, setServerError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendRequest = async (data: IssueForm) => {
     try {
+      setIsLoading(true);
       await axios.post("/api/issues", data);
       router.push("/issues");
     } catch (error) {
+      setIsLoading(false);
       setServerError("An unxpected error occurred. Please try again.");
     }
   };
@@ -66,11 +70,14 @@ export default function NewIssuePage() {
                 {...register("description")}
               ></textarea>
             </div>
-            <input
-              className="cursor-pointer rounded-md border border-transparent bg-palette-2 p-3 font-medium text-palette-4 transition-all duration-300 hover:border-palette-1"
+            <button
+              className="flex cursor-pointer items-center justify-center gap-3 rounded-md border border-transparent bg-palette-2 p-3 font-medium text-palette-4 transition-all duration-300 hover:border-palette-1"
               type="submit"
-              value="Submit New Issue"
-            />
+              disabled={isLoading}
+            >
+              {isLoading && <Spinner />}
+              Submit New Issue
+            </button>
           </div>
         </form>
       </section>
