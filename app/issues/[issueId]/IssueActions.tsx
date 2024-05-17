@@ -15,6 +15,12 @@ const IssueActions = ({ issueId }: Props) => {
         >
           Edit Issue
         </ActionBtn>
+        <ActionBtn
+          href={`/issues/${issueId}/delete`}
+          className="bg-red-200 text-center text-red-900"
+        >
+          Delete Issue
+        </ActionBtn>
       </nav>
     </aside>
   );
