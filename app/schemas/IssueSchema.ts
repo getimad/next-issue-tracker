@@ -5,4 +5,10 @@ const createIssueSchema = z.object({
   description: string().min(1, "Description is required."),
 });
 
-export { createIssueSchema };
+const editIssueSchema = z.object({
+  title: string().min(1, "Title is required.").max(255),
+  description: string().min(1, "Description is required."),
+  status: z.enum(["OPEN", "IN_PROGRESS", "CLOSED"]),
+});
+
+export { createIssueSchema, editIssueSchema };
