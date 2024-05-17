@@ -1,19 +1,19 @@
-import Link from "next/link";
+"use client";
 
 interface Props {
-  href: string;
   className?: string;
   children: React.ReactNode;
+  onClick: () => void;
 }
 
-const ActionBtn: React.FC<Props> = ({ href, className = "", children }) => {
+const ClientBtn: React.FC<Props> = ({ children, className = "", onClick }) => {
   const style = `cursor-pointer rounded-md border border-transparent px-3 py-2 font-medium transition-all duration-300 hover:border-palette-1 ${className}`;
 
   return (
-    <Link className={style} href={href}>
+    <button className={style} onClick={onClick}>
       {children}
-    </Link>
+    </button>
   );
 };
 
-export default ActionBtn;
+export default ClientBtn;
