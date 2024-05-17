@@ -1,12 +1,22 @@
 import prisma from "@/prisma/client";
+import Link from "next/link";
 
 export default async function IssuesPage() {
   const issues = await prisma.issue.findMany();
 
   return (
     <main className="m-6">
-      <h1 className="mb-6 text-3xl font-semibold text-palette-4">Issues</h1>
-      <div className="overflow-hidden rounded-xl border border-palette-2">
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-semibold text-palette-4">Issues</h1>
+        <Link
+          className="cursor-pointer rounded-md border border-transparent bg-palette-4 px-3 py-2 font-medium text-white transition-all duration-300 hover:border-palette-1"
+          href="/issues/new"
+        >
+          New Issue
+        </Link>
+      </div>
+
+      <section className="overflow-hidden rounded-xl border border-palette-2">
         <table className="w-full table-auto">
           <thead className="bg-palette-2 text-left text-palette-4">
             <tr>
@@ -41,7 +51,7 @@ export default async function IssuesPage() {
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
     </main>
   );
 }
