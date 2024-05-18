@@ -35,11 +35,16 @@ export default async function IssuesPage() {
                 className="border-b border-palette-2 last:border-0"
                 key={issue.id}
               >
-                <td className="w-1/3 p-3">
-                  {issue.title}
-                  <span className="mt-1 block text-xs font-semibold md:hidden">
-                    {issue.status}
-                  </span>
+                <td className="w-1/3">
+                  <Link
+                    className="block h-full w-full p-3 hover:underline"
+                    href={`/issues/${issue.id}`}
+                  >
+                    {issue.title}
+                    <span className="mt-1 block text-xs font-semibold md:hidden">
+                      {issue.status}
+                    </span>
+                  </Link>
                 </td>
                 <td className="hidden w-1/3 p-3 md:table-cell">
                   {issue.status}
