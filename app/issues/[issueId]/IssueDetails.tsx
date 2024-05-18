@@ -1,4 +1,4 @@
-import Issue from "@interfaces/Issue";
+import { Issue } from "@prisma/client";
 
 interface Props {
   issue: Issue;
